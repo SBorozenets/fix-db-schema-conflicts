@@ -24,6 +24,6 @@ RSpec.describe FixDBSchemaConflicts::AutocorrectConfiguration do
 
   def installed_rubocop(version:)
     allow(Gem).to receive_message_chain(:loaded_specs, :[], :version)
-                    .and_return(Gem::Version.new(version))
+      .and_return(Gem::Version.new(version))
   end
 end
