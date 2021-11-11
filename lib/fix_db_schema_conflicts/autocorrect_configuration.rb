@@ -5,21 +5,19 @@ module FixDBSchemaConflicts
     end
 
     def load
-      if less_than_rubocop?("0.49.0")
+      if less_than_rubocop?(49)
         '.rubocop_schema.yml'
-      elsif less_than_rubocop?("0.53.0")
-        '.rubocop_schema.0-49-0.yml'
-      elsif less_than_rubocop?("1.0.0")
-        '.rubocop_schema.0-53-0.yml'
+      elsif less_than_rubocop?(53)
+        '.rubocop_schema.49.yml'
       else
-        '.rubocop_schema.1-0-0.yml'
+        '.rubocop_schema.53.yml'
       end
     end
 
     private
 
     def less_than_rubocop?(ver)
-      Gem.loaded_specs['rubocop'].version < Gem::Version.new(ver)
+      Gem.loaded_specs['rubocop'].version < Gem::Version.new("0.#{ver}.0")
     end
   end
 end

@@ -13,23 +13,17 @@ RSpec.describe FixDBSchemaConflicts::AutocorrectConfiguration do
   it 'for versions 0.49.0 and above' do
     installed_rubocop(version: '0.49.0')
 
-    expect(autocorrect_config.load).to eq('.rubocop_schema.0-49-0.yml')
+    expect(autocorrect_config.load).to eq('.rubocop_schema.49.yml')
   end
 
   it 'for versions 0.53.0 and above' do
     installed_rubocop(version: '0.53.0')
 
-    expect(autocorrect_config.load).to eq('.rubocop_schema.0-53-0.yml')
-  end
-
-  it 'for versions 1.0.0 and above' do
-    installed_rubocop(version: '1.0.0')
-
-    expect(autocorrect_config.load).to eq('.rubocop_schema.1-0-0.yml')
+    expect(autocorrect_config.load).to eq('.rubocop_schema.53.yml')
   end
 
   def installed_rubocop(version:)
     allow(Gem).to receive_message_chain(:loaded_specs, :[], :version)
-      .and_return(Gem::Version.new(version))
+                    .and_return(Gem::Version.new(version))
   end
 end
